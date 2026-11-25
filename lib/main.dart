@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:conde_mobprog/constant.dart';
+import 'package:conde_mobprog/constants.dart';
 import 'package:conde_mobprog/screens/home_screen.dart';
 import 'package:conde_mobprog/screens/newsfeed_screen.dart';
-import 'package:conde_mobprog/screens/notifications_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:conde_mobprog/screens/notification_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -21,9 +21,9 @@ class MainApp extends StatelessWidget {
       builder: (_, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Facebook Replication',
+          title: appName,
           theme: ThemeData(
-            scaffoldBackgroundColor: const Color(0xFFF0F2F5),
+            scaffoldBackgroundColor: fbTextColorWhite,
             colorScheme: ColorScheme.fromSeed(seedColor: fbPrimary),
             fontFamily: 'Frutiger',
           ),
@@ -31,8 +31,8 @@ class MainApp extends StatelessWidget {
           routes: {
             '/home': (context) => const HomeScreen(),
             '/newsfeed': (context) => const Scaffold(body: NewsfeedScreen()),
-            '/notifications': (context) =>
-                const Scaffold(body: NotificationsScreen()),
+            '/notification': (context) =>
+                const Scaffold(body: NotificationScreen()),
           },
         );
       },

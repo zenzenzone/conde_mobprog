@@ -15,9 +15,11 @@ class UserAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     if (avatarPath != null && avatarPath!.isNotEmpty) {
       return CircleAvatar(
-        radius: radius.r,
-        backgroundImage: AssetImage(avatarPath!),
-      );
+  radius: radius.r,
+  backgroundColor: Colors.grey[300],
+  backgroundImage: AssetImage(avatarPath!),
+  onBackgroundImageError: (_, __) {},
+);
     }
 
     return CircleAvatar(

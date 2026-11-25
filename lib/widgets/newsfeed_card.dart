@@ -1,7 +1,7 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:conde_mobprog/constant.dart';
-import 'package:conde_mobprog/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:conde_mobprog/constants.dart';
+import 'package:conde_mobprog/widgets/custom_text.dart';
 import 'post_image.dart';
 import 'user_avatar.dart';
 import 'action_button.dart';
@@ -11,6 +11,7 @@ class NewsfeedCard extends StatefulWidget {
   final String postContent;
   final String date;
   final int numOfLikes;
+  final bool hasImage;
   final String? imagePath;
   final String? avatarPath;
   final String? currentUserAvatarPath;
@@ -21,6 +22,7 @@ class NewsfeedCard extends StatefulWidget {
     required this.postContent,
     required this.date,
     this.numOfLikes = 0,
+    this.hasImage = false,
     this.imagePath,
     this.avatarPath,
     this.currentUserAvatarPath,
@@ -46,6 +48,8 @@ class _NewsfeedCardState extends State<NewsfeedCard> {
     final likeColor = _isLiked ? fbPrimary : Colors.grey;
 
     return Card(
+      color: Colors.white,
+      elevation: 1,
       margin: EdgeInsets.all(10.w),
       child: Padding(
         padding: EdgeInsets.all(10.w),
@@ -93,9 +97,20 @@ class _NewsfeedCardState extends State<NewsfeedCard> {
             ),
             SizedBox(height: 5.h),
 
-            // Optional image
-            if (widget.imagePath != null)
-              PostImage(imagePath: widget.imagePath!),
+            // Enhancement 1: image only when hasImage is true.
+            // Real image if a path is given, otherwise a placeholder box.
+            if (widget.hasImage) ...[
+              if (widget.imagePath != null)
+                PostImage(imagePath: widget.imagePath!)
+              else
+                Container(
+                  height: 200.h,
+                  width: double.infinity,
+                  color: Colors.grey[300],
+                  child: Icon(Icons.image, size: 60.sp, color: Colors.grey),
+                ),
+              SizedBox(height: 5.h),
+            ],
 
             // Actions
             Row(
